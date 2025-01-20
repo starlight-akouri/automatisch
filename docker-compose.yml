@@ -13,9 +13,9 @@ services:
       redis:
         condition: service_started
     environment:
-      - HOST=${HOST}
-      - PROTOCOL=${PROTOCOL}
-      - PORT=${PORT}
+      - HOST=${HOST:-localhost}
+      - PROTOCOL=${PROTOCOL:-http}
+      - PORT=${PORT:-3000}
       - APP_ENV=production
       - REDIS_HOST=redis
       - POSTGRES_HOST=postgres
@@ -25,6 +25,7 @@ services:
       - ENCRYPTION_KEY=${ENCRYPTION_KEY}
       - WEBHOOK_SECRET_KEY=${WEBHOOK_SECRET_KEY}
       - APP_SECRET_KEY=${APP_SECRET_KEY}
+      - API_URL=${API_URL}
     volumes:
       - automatisch_storage:/automatisch/storage
   worker:
@@ -44,6 +45,7 @@ services:
       - ENCRYPTION_KEY=${ENCRYPTION_KEY}
       - WEBHOOK_SECRET_KEY=${WEBHOOK_SECRET_KEY}
       - APP_SECRET_KEY=${APP_SECRET_KEY}
+      - API_URL=${API_URL}
       - WORKER=true
     volumes:
       - automatisch_storage:/automatisch/storage
